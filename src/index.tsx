@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {
   ApolloClient,
@@ -10,6 +9,7 @@ import {
   useQuery,
   gql,
 } from "@apollo/client";
+import RootRouter from "./routes";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -19,7 +19,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <RootRouter />
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
