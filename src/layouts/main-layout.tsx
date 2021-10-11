@@ -6,7 +6,12 @@ const MainLayout: React.FC = ({ children }) => {
   return (
     <>
       <Header />
-      <div className="container">{children}</div>
+      <div
+        className="container mx-auto p-4"
+        style={{ minHeight: "calc(100% - 8rem)" }}
+      >
+        {children}
+      </div>
       <Footer />
     </>
   );
