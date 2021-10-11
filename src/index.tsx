@@ -10,17 +10,24 @@ import {
   gql,
 } from "@apollo/client";
 import RootRouter from "./routes";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./modules";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
   cache: new InMemoryCache(),
 });
 
+const store = createStore(rootReducer);
+
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <RootRouter />
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <RootRouter />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
