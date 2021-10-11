@@ -1,6 +1,9 @@
 import { combineReducers } from "redux";
+import auth from "./auth.reducer";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  auth,
+});
 
 // 루트 리듀서를 내보내주세요.
 export default rootReducer;

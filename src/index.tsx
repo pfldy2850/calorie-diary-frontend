@@ -8,14 +8,19 @@ import {
   ApolloProvider,
   useQuery,
   gql,
+  createHttpLink,
 } from "@apollo/client";
-import RootRouter from "./routes";
+import { RootRouter } from "./routes";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import rootReducer from "./modules";
+import rootReducer from "./reducers";
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:4000/graphql",
+});
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  link: httpLink,
   cache: new InMemoryCache(),
 });
 
