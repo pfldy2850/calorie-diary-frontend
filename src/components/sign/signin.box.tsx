@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { AUTH_TOKEN, USER_EMAIL } from "../../constants";
-import { MUTATION_AUTHENTICATE } from "../../graphql/queries/auth.query";
+import { MUTATION_SIGN_IN_USER } from "../../graphql/auth/mutations";
 import ImgFrt from "../../images/image-front.jpg";
 import { signInSuccess } from "../../reducers/auth.reducer";
 
@@ -22,7 +22,7 @@ const SignInBox: React.FC = () => {
     password: "",
   });
 
-  const [signIn] = useMutation(MUTATION_AUTHENTICATE, {
+  const [signIn] = useMutation(MUTATION_SIGN_IN_USER, {
     variables: {
       input: {
         email: formState.email,
@@ -30,9 +30,10 @@ const SignInBox: React.FC = () => {
       },
     },
     onCompleted: (data) => {
-      dispatch(signInSuccess(formState.email, data.authenticate));
-      localStorage.setItem(USER_EMAIL, formState.email);
-      localStorage.setItem(AUTH_TOKEN, data.authenticate);
+      const {
+        signInUser: { email, token },
+      } = data;
+      dispatch(signInSuccess(email, token));
       history.push("/");
     },
     onError: (error: ApolloError) => {
@@ -41,29 +42,6 @@ const SignInBox: React.FC = () => {
     },
   });
 
-  // const { email, password } = form;
-
-  // const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.currentTarget;
-  //   setForm({
-  //     ...form,
-  //     [name]: value,
-  //   });
-  // };
-
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   authenticate({
-  //     variables: {
-  //       input: {
-  //         email,
-  //         password,
-  //       },
-  //     },
-  //   });
-
-  //   console.log(loading, error, data);
-  // };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formState);

@@ -13,9 +13,7 @@ const RoleRoute: React.FC<{
   let accessible = false;
   let redirected_url = "/";
 
-  const isSignedIn =
-    useSelector((state: RootState) => state.auth.isLoggedIn) &&
-    localStorage.getItem(AUTH_TOKEN) !== null;
+  const isSignedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   switch (props.role) {
     case RouteType.All:

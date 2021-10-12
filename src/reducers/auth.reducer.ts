@@ -1,3 +1,5 @@
+import { AUTH_TOKEN, USER_EMAIL } from "../constants";
+
 // 액션 타입 선언
 const SIGNIN_SUCCESS = "auth/SIGNIN_SUCCESS" as const;
 const SIGNIN_FAILURE = "auth/SIGNIN_FAILURE" as const;
@@ -31,12 +33,15 @@ export type AuthState = {
   };
 };
 
+const auth_token = localStorage.getItem(AUTH_TOKEN);
+const user_email = localStorage.getItem(USER_EMAIL);
+
 // 초기 상태 선언
 const initialState: AuthState = {
-  isLoggedIn: false,
+  isLoggedIn: auth_token !== null,
   user: {
-    email: "",
-    token: "",
+    email: user_email ? user_email : "",
+    token: auth_token ? auth_token : "",
   },
 };
 
@@ -49,12 +54,18 @@ type AuthAction =
 function auth(state: AuthState = initialState, action: AuthAction): AuthState {
   switch (action.type) {
     case SIGNIN_SUCCESS:
+      localStorage.setItem(AUTH_TOKEN, action.payload.user.token);
+      localStorage.setItem(USER_EMAIL, action.payload.user.email);
+
       return Object.assign({}, state, {
         isLoggedIn: true,
         user: action.payload.user,
       });
     case SIGNIN_FAILURE:
     case SIGNOUT:
+      localStorage.removeItem(AUTH_TOKEN);
+      localStorage.removeItem(USER_EMAIL);
+
       return Object.assign({}, state, {
         isLoggedIn: false,
         user: {

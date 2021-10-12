@@ -15,14 +15,6 @@ export enum RouteType {
 }
 
 export const RootRouter: React.FC = () => {
-  const dispatch = useDispatch();
-
-  const user_email = localStorage.getItem(USER_EMAIL);
-  const auth_token = localStorage.getItem(AUTH_TOKEN);
-  if (user_email && auth_token) {
-    dispatch(signInSuccess(user_email, auth_token));
-  }
-
   return (
     <BrowserRouter>
       <Switch>

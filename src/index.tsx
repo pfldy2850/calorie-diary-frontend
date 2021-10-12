@@ -14,13 +14,25 @@ import { RootRouter } from "./routes";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./reducers";
+import { setContext } from "@apollo/client/link/context";
+import { AUTH_TOKEN } from "./constants";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
 });
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

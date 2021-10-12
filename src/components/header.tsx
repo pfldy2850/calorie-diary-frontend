@@ -9,13 +9,12 @@ const Header: React.FC = () => {
   const isSignedIn =
     useSelector((state: RootState) => state.auth.isLoggedIn) &&
     localStorage.getItem(AUTH_TOKEN) !== null;
+  const userEmail = useSelector((state: RootState) => state.auth.user.email);
 
   const dispatch = useDispatch();
 
   const onClickSignOut = () => {
     dispatch(signOut());
-    localStorage.removeItem(AUTH_TOKEN);
-    localStorage.removeItem(USER_EMAIL);
   };
 
   return (
@@ -58,6 +57,14 @@ const Header: React.FC = () => {
           >
             SignOut
           </button>
+        ) : (
+          ""
+        )}
+
+        {isSignedIn ? (
+          <span className="text-sm text-gray-500 float-right">
+            Welcome, `{userEmail}`!
+          </span>
         ) : (
           ""
         )}
