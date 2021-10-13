@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="sticky top-0 left-0 w-full px-6 py-5">
+    <div className="sticky top-0 left-0 w-full px-6 py-5 border-b-2 bg-white z-50">
       <div className="container mx-auto">
         <NavLink to="/" className="text-3xl text-gray-900 font-bold mr-8">
           FOOD.log
