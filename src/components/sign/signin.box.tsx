@@ -66,22 +66,18 @@ const SignInBox: React.FC = () => {
                 Hi 👋 Welcome Back <br />
                 FOOD.log
               </h1>
-              <p className="pr-3">
-                Lorem ipsum is placeholder text commonly used in the graphic,
-                print, and publishing industries for previewing layouts and
-                visual mockups
-              </p>
+              <p className="pr-3"></p>
             </div>
           </div>
           <form className="p-6 bg-white rounded-xl" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
-              <p className="text-gray-500">Please sign in to your account.</p>
+              <h3 className="font-semibold text-2xl text-gray-800">로그인</h3>
+              <p className="text-gray-500">회원정보를 입력해주세요.</p>
             </div>
             <div className="space-y-5">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700 tracking-wide">
-                  Email
+                  이메일
                 </label>
                 <input
                   className="w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
@@ -99,7 +95,7 @@ const SignInBox: React.FC = () => {
               </div>
               <div className="space-y-2">
                 <label className="mb-5 text-sm font-medium text-gray-700 tracking-wide">
-                  Password
+                  비밀번호
                 </label>
                 <input
                   className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
@@ -120,7 +116,7 @@ const SignInBox: React.FC = () => {
               </div>
               <div>
                 <button className="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500">
-                  Sign in
+                  로그인
                 </button>
               </div>
             </div>

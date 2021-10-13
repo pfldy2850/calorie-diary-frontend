@@ -30,7 +30,7 @@ const Header: React.FC = () => {
             className="text-lg text-gray-500 hover:text-gray-700 mx-4"
             activeClassName="text-gray-900 border-b-2 border-gray-500"
           >
-            SignIn
+            로그인
           </NavLink>
         ) : (
           ""
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
             className="text-lg text-gray-500 hover:text-gray-700 mx-4"
             activeClassName="text-gray-900 border-b-2 border-gray-500"
           >
-            SignUp
+            회원가입
           </NavLink>
         ) : (
           ""
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
               onClickSignOut();
             }}
           >
-            SignOut
+            로그아웃
           </button>
         ) : (
           ""
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
 
         {isSignedIn ? (
           <span className="text-sm text-gray-500 float-right">
-            Welcome, `{userEmail}`!
+            환영합니다, `{userEmail}`님!
           </span>
         ) : (
           ""
