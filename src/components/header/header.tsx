@@ -1,9 +1,8 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import { AUTH_TOKEN, USER_EMAIL } from "../../constants";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { AUTH_TOKEN } from "../../constants";
 import { RootState } from "../../reducers";
-import { signOut } from "../../reducers/auth.reducer";
 import { HeaderNav } from "./header-nav";
 import { DefaultLogo } from "../logo";
 

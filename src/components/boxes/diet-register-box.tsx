@@ -5,7 +5,6 @@ import { MUTATION_REGISTER_DIET } from "../../graphql/mutations";
 import { registerMyDiets } from "../../reducers/diet.reducer";
 import { GetTodayDate } from "../../utils";
 import { DefaultFormInput } from "../inputs/default-form.input";
-import { DietDataRow } from "../tables/diet-datatable";
 import { DefaultBox } from "./default";
 
 export const DietRegisterBox: React.FC = (props) => {

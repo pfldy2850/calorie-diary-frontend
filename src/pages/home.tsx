@@ -1,9 +1,5 @@
 import { useLazyQuery, useQuery } from "@apollo/client";
 import * as React from "react";
-import { ResponsiveContainer } from "recharts";
-import { EatHistoryInputBox } from "../components/boxes/eat-history-input.box";
-import { WeekRecordsBox } from "../components/boxes/week-records.box";
-import { EatHistoryInputContainer } from "../components/containers/eat-history-input.container";
 import { QUERY_ME } from "../graphql/queries";
 import DashBoardLayout from "../components/layouts/dashboard-layout";
 

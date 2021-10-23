@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { QUERY_MY_DIETS } from "../../graphql/queries";
 import { RootState } from "../../reducers";
@@ -12,7 +12,7 @@ export const DietTableBox: React.FC = (props) => {
 
   const dispatch = useDispatch();
 
-  const { data, loading, error, refetch } = useQuery(QUERY_MY_DIETS, {
+  const { loading } = useQuery(QUERY_MY_DIETS, {
     onCompleted: (returned) => {
       const { myDiets } = returned;
       dispatch(loadMyDiets(myDiets));
@@ -21,7 +21,7 @@ export const DietTableBox: React.FC = (props) => {
 
   return (
     <DefaultBox title="먹기록 리스트">
-      <DietDataTable data={myDiets} loading={myDiets.length == 0 && loading} />
+      <DietDataTable data={myDiets} loading={myDiets.length === 0 && loading} />
     </DefaultBox>
   );
 };
