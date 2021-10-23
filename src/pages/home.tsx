@@ -4,8 +4,8 @@ import { ResponsiveContainer } from "recharts";
 import { EatHistoryInputBox } from "../components/boxes/eat-history-input.box";
 import { WeekRecordsBox } from "../components/boxes/week-records.box";
 import { EatHistoryInputContainer } from "../components/containers/eat-history-input.container";
-import { QUERY_ME } from "../graphql/auth/queries";
-import MainLayout from "../layouts/main-layout";
+import { QUERY_ME } from "../graphql/queries";
+import DashBoardLayout from "../components/layouts/dashboard-layout";
 
 const PageHome: React.FC = () => {
   // const [whoAmI, { loading, error, data, refetch }] = useLazyQuery(QUERY_ME);
@@ -17,19 +17,10 @@ const PageHome: React.FC = () => {
   });
 
   return (
-    <MainLayout>
-      <div className="grid grid-cols-4 gap-8">
-        <div className="col-span-4">
-          <WeekRecordsBox />
-        </div>
-        <div className="col-span-4">
-          <EatHistoryInputContainer />
-        </div>
-        <div className="col-span-4">
-          <WeekRecordsBox />
-        </div>
-      </div>
-    </MainLayout>
+    <DashBoardLayout
+      mainTitle="Welcome Back!"
+      subTitle="환영합니다 ~~~님! FOOD.log에서 식단을 관리하세요!"
+    ></DashBoardLayout>
   );
 };
 

@@ -9,8 +9,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { AUTH_TOKEN, USER_EMAIL } from "../../constants";
-import { MUTATION_SIGN_IN_USER } from "../../graphql/auth/mutations";
-import ImgFrt from "../../images/image-front.jpg";
+import { MUTATION_SIGN_IN_USER } from "../../graphql/mutations";
+import ImgFrt from "../../resources/images/image-front.jpg";
 import { signInSuccess } from "../../reducers/auth.reducer";
 
 const SignInBox: React.FC = () => {

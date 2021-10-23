@@ -1,49 +1,72 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../reducers";
+import { ApolloError, useMutation } from "@apollo/client";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { MUTATION_REGISTER_DIET } from "../../graphql/mutations";
+import { registerMyDiets } from "../../reducers/diet.reducer";
 import { GetTodayDate } from "../../utils";
 import { DefaultFormInput } from "../inputs/default-form.input";
-import { BoxTitle } from "./title";
+import { DietDataRow } from "../tables/diet-datatable";
+import { DefaultBox } from "./default";
 
-interface EatHistoryInputBoxFormProps {
-  date: string;
-  name: string;
-  calorie: number;
-  carbohydrate: number;
-  sugars: number;
-  protein: number;
-  fat: number;
-  saturatedFat: number;
-  transFat: number;
-  cholesterol: number;
-  sodium: number;
-}
+export const DietRegisterBox: React.FC = (props) => {
+  const dispatch = useDispatch();
 
-interface EatHistoryInputBoxProps {
-  formState: EatHistoryInputBoxFormProps;
-  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+  const [formState, setFormState] = useState({
+    date: GetTodayDate(),
+    name: "",
+    calorie: 0,
+    carbohydrate: 0,
+    sugars: 0,
+    protein: 0,
+    fat: 0,
+    saturatedFat: 0,
+    transFat: 0,
+    cholesterol: 0,
+    sodium: 0,
+  });
 
-export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
-  props
-) => {
-  const userEmail = useSelector((state: RootState) => state.auth.user.email);
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const targetValue =
+      e.target.type === "number" ? parseFloat(e.target.value) : e.target.value;
 
-  const formState = props.formState;
-  const onChangeInput = props.onChangeInput;
+    setFormState({
+      ...formState,
+      [e.target.name]: targetValue,
+    });
+  };
+  const [registerDiet] = useMutation(MUTATION_REGISTER_DIET, {
+    variables: {
+      input: formState,
+    },
+    onCompleted: (data) => {
+      const { registerDiet } = data;
+      console.log(data);
+
+      dispatch(registerMyDiets(registerDiet));
+    },
+    onError: (error: ApolloError) => {
+      // FIXME: GraphQL error handling
+      console.log(error);
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formState);
+    registerDiet();
+  };
 
   return (
-    <div className="w-full h-full my-4">
-      <BoxTitle>먹은 음식 기록하기</BoxTitle>
-      <form className="w-full bg-white rounded border shadow p-6">
-        <div className=" grid grid-cols-6 gap-3">
+    <DefaultBox title="먹기록 등록하기">
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-6 gap-3">
           <DefaultFormInput
             label="먹은날"
             type="date"
             name="date"
             onChange={onChangeInput}
             value={formState.date}
-            colSpan={6}
+            colSpan={2}
           />
 
           <DefaultFormInput
@@ -53,7 +76,7 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
             placeholder="ex) 하림 닭가슴살 100g"
             onChange={onChangeInput}
             value={formState.name}
-            colSpan={6}
+            colSpan={4}
           />
 
           <DefaultFormInput
@@ -63,7 +86,7 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
             placeholder="ex) 100"
             onChange={onChangeInput}
             value={formState.calorie}
-            colSpan={6}
+            colSpan={2}
           />
 
           <DefaultFormInput
@@ -72,7 +95,7 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
             name="carbohydrate"
             onChange={onChangeInput}
             value={formState.carbohydrate}
-            colSpan={3}
+            colSpan={2}
           />
 
           <DefaultFormInput
@@ -81,16 +104,7 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
             name="sugars"
             onChange={onChangeInput}
             value={formState.sugars}
-            colSpan={3}
-          />
-
-          <DefaultFormInput
-            label="단백질 (g)"
-            type="number"
-            name="protein"
-            onChange={onChangeInput}
-            value={formState.protein}
-            colSpan={6}
+            colSpan={2}
           />
 
           <DefaultFormInput
@@ -121,12 +135,21 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
           />
 
           <DefaultFormInput
+            label="단백질 (g)"
+            type="number"
+            name="protein"
+            onChange={onChangeInput}
+            value={formState.protein}
+            colSpan={2}
+          />
+
+          <DefaultFormInput
             label="콜레스테롤 (mg)"
             type="number"
             name="cholesterol"
             onChange={onChangeInput}
             value={formState.cholesterol}
-            colSpan={3}
+            colSpan={2}
           />
 
           <DefaultFormInput
@@ -135,7 +158,7 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
             name="sodium"
             onChange={onChangeInput}
             value={formState.sodium}
-            colSpan={3}
+            colSpan={2}
           />
         </div>
 
@@ -143,6 +166,6 @@ export const EatHistoryInputBox: React.FC<EatHistoryInputBoxProps> = (
           등록
         </button>
       </form>
-    </div>
+    </DefaultBox>
   );
 };

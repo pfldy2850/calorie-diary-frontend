@@ -1,4 +1,5 @@
 import React from "react";
+import { BoxTitle } from "./title";
 
 interface EatHistoryRecommendBoxProps {
   name: string;
@@ -12,9 +13,29 @@ export const EatHistoryRecommendBox: React.FC<EatHistoryRecommendBoxProps> = (
 
   return (
     <div className="w-full h-full my-4">
-      <h2 className="text-xl font-bold mb-4">이전에 먹었던 것인가요?</h2>
+      <BoxTitle>이전에 먹었던 것인가요?</BoxTitle>
       <div className="w-full bg-white rounded border shadow p-6">
-        하림 닭가슴살 100g
+        <div className="flex">
+          <p className="cursor-pointer hover:text-yellow-400">
+            하림 닭가슴살 100g
+          </p>
+          <div className="ml-4">
+            <span className="p-1 text-xs text-white bg-black border border-black">
+              탄수
+            </span>
+            <span className="p-1 text-xs text-black border border-black">
+              100
+            </span>
+          </div>
+          <div className="ml-2">
+            <span className="p-1 text-xs text-white bg-black border border-black">
+              당
+            </span>
+            <span className="p-1 text-xs text-black border border-black">
+              100
+            </span>
+          </div>
+        </div>
       </div>
       <div className="w-full bg-white rounded border shadow p-6 mt-2">
         {props.name}

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { CustomLineChart } from "../charts/line.chart";
+import { BoxTitle } from "./title";
 
 export const WeekRecordsBox: React.FC = () => {
   const userEmail = useSelector((state: RootState) => state.auth.user.email);
@@ -44,9 +45,7 @@ export const WeekRecordsBox: React.FC = () => {
   ];
   return (
     <div className="w-full h-full my-4">
-      <h2 className="text-xl font-bold mb-4">
-        `{userEmail}`님의 주간 섭취 칼로리 그래프
-      </h2>
+      <BoxTitle>`{userEmail}`님의 주간 섭취 칼로리 그래프</BoxTitle>
 
       <div className="w-full bg-white rounded border shadow p-6">
         <CustomLineChart

@@ -19,3 +19,21 @@ export const MUTATION_SIGN_IN_USER = gql`
     }
   }
 `;
+
+export const MUTATION_REGISTER_DIET = gql`
+  mutation registerDiet($input: RegisterDietInput!) {
+    registerDiet(registerDietInput: $input) {
+      date
+      name
+      calorie
+      carbohydrate
+      sugars
+      protein
+      fat
+      saturatedFat
+      transFat
+      cholesterol
+      sodium
+    }
+  }
+`;

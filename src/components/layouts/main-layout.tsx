@@ -1,11 +1,11 @@
 import * as React from "react";
-import Header from "../components/header";
+import Header from "../header/header";
 
 const MainLayout: React.FC = ({ children }) => {
   return (
     <div>
       <Header />
-      <div className="container mx-auto py-6">{children}</div>
+      {children}
     </div>
   );
 };

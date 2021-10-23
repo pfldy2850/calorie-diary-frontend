@@ -13,7 +13,7 @@ export const DefaultFormInput: React.FC<DefaultFormInputProps> = (props) => {
     <div className={`col-span-${props.colSpan}`}>
       <label
         htmlFor={props.name}
-        className="block text-base font-medium text-gray-700 mt-2"
+        className="block text-xs font-medium text-gray-700 mt-2"
       >
         {props.label}
       </label>
@@ -22,7 +22,7 @@ export const DefaultFormInput: React.FC<DefaultFormInputProps> = (props) => {
         name={props.name}
         placeholder={props.placeholder}
         autoComplete="given-name"
-        className="focus:ring-indigo-500 block w-full border-gray-300 border-b-2 p-1 px-2"
+        className="focus:ring-indigo-500 block w-full border-gray-300 border-b-2 p-1 px-2 text-xs"
         value={props.value}
         onChange={props.onChange}
       />
